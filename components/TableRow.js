@@ -62,13 +62,13 @@ const TableRow = ({ txn }) => {
           <div className="flex items-center space-x-2">
             {/* TODO: Fix the view transactions problem */}
             <TransactionDetail key={txn._id} txn={txn} />
-            <Link href={`/${txn._id}/edit`}>
+            <Link href={`/update/${txn._id}`}>
               <a href="">
                 <PencilIcon className='w-6' />
               </a>
             </Link>
             <label htmlFor="my-modal-4" className="modal-button">
-              <TrashIcon className='w-6 text-error cursor-pointer' />
+              <TrashIcon className='w-6 text-error cursor-pointer' onClick={()=> handleDelete(txn._id)} />
             </label>
           </div>
         </td>

@@ -1,15 +1,17 @@
-import { readTask } from '../../redux/features/taskSlice'
+import { readTxn } from '../../redux/features/txnSlice'
 import { wrapper } from '../../redux/store'
 
-import TaskUpdate from '../../components/TaskUpdate'
+import TxnUpdate from '../../components/TxnUpdate';
+import MainContainer from '../../components/MainContainer'
 
 
-export default function UpdateId() {
+export default function UpdateTxnId() {
   return (
-    <div>
-      <h3>Update</h3>
-      <TaskUpdate />
-    </div>
+
+    <MainContainer>
+      <TxnUpdate />
+    </MainContainer>
+
   )
 }
 
@@ -17,6 +19,6 @@ export default function UpdateId() {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async ({ params, req }) => {
     const id = params.id
-    await store.dispatch(readTask({ id, req }));
+    await store.dispatch(readTxn({ id, req }));
   }
 );

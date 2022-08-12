@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createTxn } from '../redux/features/txnSlice';
@@ -75,7 +75,6 @@ const InputForm = () => {
             <textarea name="description" className="textarea textarea-bordered my-2 w-full" placeholder="Description"></textarea>
             <button type='submit' disabled={loading} className="btn w-full btn-primary my-2">Add</button>
           </form>
-          {/* TODO: add auto disappear */}
           {added && <div className="toast toast-top toast-end">
             <div className="alert alert-success">
               <div>
