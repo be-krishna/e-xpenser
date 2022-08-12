@@ -1,5 +1,6 @@
 import React from 'react'
 import { useUser } from '../lib/hooks'
+import AlertModal from './AlertModal'
 import Sidebar from './Sidebar'
 
 const Layout = ({ children }) => {

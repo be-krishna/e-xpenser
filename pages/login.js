@@ -26,6 +26,9 @@ export default function LoginPage() {
       mutate(userObj)
     } else {
       setErrorMsg('Incorrect username or password. Try better!')
+      setTimeout(() => {
+        setErrorMsg('')
+      }, 2000);
     }
   }
 
@@ -35,27 +38,46 @@ export default function LoginPage() {
   }, [user])
 
   return (
-    <>
-      <h1>Login to Example</h1>
-      {errorMsg && <p className="error">{errorMsg}</p>}
-      <div className="form-container">
-        <form onSubmit={onSubmit}>
-          <label>
-            <span>Username</span>
-            <input type="text" name="username" required />
-          </label>
-          <label>
-            <span>Password</span>
-            <input type="password" name="password" required />
-          </label>
-          <div className="submit">
-            <button type="submit">Login</button>
-            <Link href="/signup">
-              <a>I don't have an account</a>
-            </Link>
+    <div className='flex items-center justify-center h-screen'>
+      <div className="card w-2/6 max-h-full bg-base-100 shadow-lg">
+        {errorMsg ? <div className="toast toast-top toast-end">
+          <div className="alert alert-error">
+            <div>
+              <span>{errorMsg}</span>
+            </div>
           </div>
-        </form>
+        </div> : ""}
+        <div className="card-body items-center">
+          <h2 className="card-title">Login</h2>
+          <form onSubmit={onSubmit} className="container w-full">
+            <label className="label">
+              <span className="label-text">Username</span>
+            </label>
+            <input
+              required
+              id="username"
+              type="text"
+              name="username"
+              placeholder="Username"
+              className="input input-bordered w-full" />
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              required
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="input input-bordered w-full" />
+            <button type='submit' className="btn w-full btn-primary my-4">Login</button>
+            <div className="flex justify-evenly">
+              <Link href="/resetpassword"><a>Forgot Password?</a></Link>
+              <Link href="/signup"><a>Create account</a></Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </>
+    </div>
   )
 }

@@ -67,7 +67,9 @@ const TableRow = ({ txn }) => {
                 <PencilIcon className='w-6' />
               </a>
             </Link>
-            <TrashIcon className='w-6 text-error cursor-pointer' onClick={() => handleDelete(txn._id)} />
+            <label htmlFor="my-modal-4" className="modal-button">
+              <TrashIcon className='w-6 text-error cursor-pointer' />
+            </label>
           </div>
         </td>
       </tr>

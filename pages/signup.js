@@ -18,6 +18,9 @@ export default function SignupPage() {
 
     if (body.password !== e.currentTarget.rpassword.value) {
       setErrorMsg(`The passwords don't match`)
+      setTimeout(() => {
+        setErrorMsg('')
+      }, 2000)
       return
     }
 
@@ -43,33 +46,65 @@ export default function SignupPage() {
 
   return (
     <>
-      <h1>Sign up to Example</h1>
-      {errorMsg && <p className="error">{errorMsg}</p>}
-      <div className="form-container">
-        <form onSubmit={onSubmit}>
-          <label>
-            <span>Username</span>
-            <input type="text" name="username" required />
-          </label>
-          <label>
-            <span>Password</span>
-            <input type="password" name="password" required />
-          </label>
-          <label>
-            <span>Repeat password</span>
-            <input type="password" name="rpassword" required />
-          </label>
-          <label>
-            <span>Name</span>
-            <input type="text" name="name" required />
-          </label>
-          <div className="submit">
-            <button type="submit">Sign up</button>
-            <Link href="/login">
-              <a>I already have an account</a>
-            </Link>
+      <div className='flex items-center justify-center h-screen'>
+        <div className="card w-2/6 max-h-full bg-base-100 shadow-lg">
+          {errorMsg ? <div className="toast toast-top toast-end">
+            <div className="alert alert-error">
+              <div>
+                <span>{errorMsg}</span>
+              </div>
+            </div>
+          </div> : ""}
+          <div className="card-body items-center">
+            <h2 className="card-title">Signup</h2>
+            <form onSubmit={onSubmit} className="container w-full">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                required
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Name"
+                className="input input-bordered w-full" />
+              <label className="label">
+                <span className="label-text">Username</span>
+              </label>
+              <input
+                required
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Username"
+                className="input input-bordered w-full" />
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                required
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="input input-bordered w-full" />
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
+              <input
+                required
+                id="rpassword"
+                type="password"
+                name="rpassword"
+                placeholder="Password"
+                className="input input-bordered w-full" />
+              <button type='submit' className="btn w-full btn-primary my-4">Signup</button>
+              <div className="flex justify-center">
+                <Link href="/login"><a>I have account</a></Link>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </>
   )
