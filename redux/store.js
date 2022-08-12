@@ -7,13 +7,13 @@ import txnsReducer from "./features/txnsSlice"
 import txnReducer from "./features/txnSlice"
 
 const makeStore = () => configureStore({
-    reducer: {
-        tasks: tasksReducer,
-        task: taskReducer,
-        txns: txnsReducer, 
-        txn: txnReducer, 
-    },
-    devtools: true
+  reducer: {
+    tasks: tasksReducer,
+    task: taskReducer,
+    txns: txnsReducer, 
+    txn: txnReducer, 
+  },
+  devtools: true
 })
 
 

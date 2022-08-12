@@ -1,4 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { createTxn } from '../redux/features/txnSlice';
+import { readTxns } from '../redux/features/txnsSlice';
 import moment from 'moment';
 
 const categories = [
@@ -10,47 +14,43 @@ const categories = [
 
 const max_date = moment().format('YYYY-MM-DD');
 
-const InputForm = ({ updateTxn }) => {
+const InputForm = () => {
+  const dispatch = useDispatch();
+  const { loading, success } = useSelector((state) => state.txn);
+
+  const [added, setAdded] = useState(false)
+
   const [selectedOption, setSelectedOption] = useState("");
   const [expense, setExpense] = useState(true)
-  const [errorMsg, setErrorMsg] = useState({})
 
   const handleOptions = (e) => {
     setSelectedOption(e.target.value)
   }
 
   const handleSubmit = async (e) => {
-
     e.preventDefault()
+
     const body = {
       title: e.currentTarget.title.value,
       amount: e.currentTarget.amount.value,
-      category: e.currentTarget.category.value,
+      category: expense ? e.currentTarget.category.value : "income",
       date: e.currentTarget.date.value,
       description: e.currentTarget.description.value,
       type: expense ? "expense" : "income"
     }
 
-    const res = await fetch('/api/transactions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    })
-    if (res.status === 201) {
-      const txn = await res.json()
-      updateTxn(txn.data)
-      setErrorMsg({ ...errorMsg, type: "success", msg: "Added successfully" })
-      console.log(errorMsg);
-      setTimeout(() => {
-        setErrorMsg('')
-      }, 2000)
-      e.target.reset()
-    } else {
-      setErrorMsg({ ...errorMsg, type: "error", msg: 'Failed to add' })
-      setTimeout(() => {
-        setErrorMsg('')
-      }, 2000);
-    }
+    console.log(body);
+
+    await dispatch(createTxn(body)).then(() => {
+      dispatch(readTxns());
+      setAdded(true)
+    });
+
+    setTimeout(() => {
+      setAdded(false)
+    }, 2000);
+
+    e.target.reset()
   }
 
   return (
@@ -68,23 +68,21 @@ const InputForm = ({ updateTxn }) => {
 
             <select name="category" onChange={handleOptions} value={selectedOption} className='select select-bordered my-2 w-full' disabled={!expense}>
               <option value="" disabled>Select Category</option>
-              {/* <option value="grapefruit">Grapefruit</option>
-              <option selected value="coconut">Coconut</option>
-              <option value="mango">Mango</option> */}
               {categories.map((cat) => (<option key={cat.id} value={cat.value}>{cat.name}</option>))}
             </select>
 
             <input type="date" max={max_date} name="date" placeholder="Date" className="my-2 input input-bordered w-full" />
             <textarea name="description" className="textarea textarea-bordered my-2 w-full" placeholder="Description"></textarea>
-            <button type='submit' className="btn w-full btn-primary my-2">Add</button>
+            <button type='submit' disabled={loading} className="btn w-full btn-primary my-2">Add</button>
           </form>
-          {Object.keys(errorMsg).length > 0 ? <div className="toast toast-top toast-end">
-            <div className={`alert ${errorMsg.type !== 'error' ? 'alert-success' : 'alert-error'}`}>
+          {/* TODO: add auto disappear */}
+          {added && <div className="toast toast-top toast-end">
+            <div className="alert alert-success">
               <div>
-                <span>{errorMsg.msg}</span>
+                <span>Added Successfully!</span>
               </div>
             </div>
-          </div> : ""}
+          </div>}
         </div>
       </div>
     </>

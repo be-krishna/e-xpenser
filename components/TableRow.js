@@ -3,33 +3,40 @@ import { CakeIcon, MusicNoteIcon, PencilIcon, QuestionMarkCircleIcon, TagIcon, T
 import TransactionDetail from './TransactionDetail'
 import moment from 'moment'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
+import { deleteTxn } from "../redux/features/txnSlice"
+import { readTxns } from "../redux/features/txnsSlice"
 
-const TableRow = ({ deleteTxn, ...props }) => {
+const TableRow = ({ txn }) => {
   const [deleted, setDeleted] = useState(false)
-  const handleDelete = () => {
-    const deleted = deleteTxn(props._id)
 
-    if (deleted) {
+  const dispatch = useDispatch()
+
+  const handleDelete = (id) => {
+    dispatch(deleteTxn(id)).then(() => {
+      dispatch(readTxns())
       setDeleted(true)
-      setTimeout(() => {
-        setDeleted(false)
-      }, 2000)
-    }
+    })
+
+    setTimeout(() => {
+      setDeleted(false)
+    }, 2000);
   }
+
 
   const categoryIcon = (cat) => {
 
     switch (cat) {
-      case "food_drink":
-        return <CakeIcon />
-      case "entertainment":
-        return <MusicNoteIcon />
-      case "transport":
-        return <TruckIcon />
-      case "misc":
-        return <TagIcon />
-      default:
-        return <QuestionMarkCircleIcon />
+    case "food_drink":
+      return <CakeIcon />
+    case "entertainment":
+      return <MusicNoteIcon />
+    case "transport":
+      return <TruckIcon />
+    case "misc":
+      return <TagIcon />
+    default:
+      return <QuestionMarkCircleIcon />
     }
   }
 
@@ -39,37 +46,38 @@ const TableRow = ({ deleteTxn, ...props }) => {
         <td>
           <div className="flex items-center space-x-6">
             <div className='w-8 text-success'>
-              {categoryIcon(props.category)}
+              {categoryIcon(txn.category)}
             </div>
             <div>
-              <div className="font-bold">{props.title}</div>
-              <span className="badge badge-success badge-sm">{props.category}</span>
+              <div className="font-bold">{txn.title}</div>
+              <span className="badge badge-success badge-sm">{txn.category}</span>
             </div>
           </div>
         </td>
         <td>
-          ₹ {new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(props.amount)}
+          ₹ {new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(txn.amount)}
         </td>
-        <td>{moment(props.date).format("MMM Do YY")}</td>
+        <td>{moment(txn.date).format("MMM Do YY")}</td>
         <td>
           <div className="flex items-center space-x-2">
-            <TransactionDetail {...props} />
-            <Link href={`/${props._id}/edit`}>
+            {/* TODO: Fix the view transactions problem */}
+            <TransactionDetail key={txn._id} txn={txn} />
+            <Link href={`/${txn._id}/edit`}>
               <a href="">
                 <PencilIcon className='w-6' />
               </a>
             </Link>
-            <TrashIcon className='w-6 text-error cursor-pointer' onClick={handleDelete} />
-            {deleted
-              ? <div className="alert alet-success">
-                <div>
-                  <span>Deleted</span>
-                </div>
-              </div>
-              : ''}
+            <TrashIcon className='w-6 text-error cursor-pointer' onClick={() => handleDelete(txn._id)} />
           </div>
         </td>
       </tr>
+      {deleted && <div className="toast toast-top toast-end">
+        <div className="alert alert-success">
+          <div>
+            <span>Added Successfully!</span>
+          </div>
+        </div>
+      </div>}
     </>
   )
 }

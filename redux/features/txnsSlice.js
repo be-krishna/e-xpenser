@@ -20,7 +20,7 @@ export const readTxns = createAsyncThunk("txns/readTxns", async () => {
 const txnsSlice = createSlice({
   name: "txns",
   initialState: {
-    tasks: [],
+    txns: [],
     loading: null,
     success: null,
     message: null
@@ -38,7 +38,7 @@ const txnsSlice = createSlice({
     },
     [readTxns.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.tasks = payload.txns;
+      state.txns = payload.txns;
       state.success = true;
     },
     [readTxns.rejected]: (state, { payload }) => {

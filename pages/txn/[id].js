@@ -1,15 +1,12 @@
 import { readTxn } from '../../redux/features/txnSlice'
 import { wrapper } from '../../redux/store'
 
-import TxnDetails from '../../components/TxnDetails'
+import TransactionDetail from '../../components/TransactionDetail'
 
 
-export default function TaskId() {
+export default function TxnId() {
   return (
-    <div>
-      <h3>Details</h3>
-      <TxnDetails />
-    </div>
+    <TransactionDetail />
   )
 }
 
