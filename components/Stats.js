@@ -16,7 +16,7 @@ const totalRev = (txns) => {
   return total
 }
 const Stats = () => {
-  const {txns, loading, success } = useSelector((state) => state.txns);
+  const { txns, loading, success } = useSelector((state) => state.txns);
 
   const [stats, setStats] = useState({
     expense: 0,
@@ -64,7 +64,7 @@ const Stats = () => {
         </div>
         <div className="stat-title">Total</div>
         <div className="stat-value">
-          ₹ {new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(stats.expense + stats.revenue)}
+          ₹ {new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(stats.revenue - stats.expense)}
         </div>
         {/* <div className="stat-desc">↘︎ 90 (14%)</div> */}
       </div>

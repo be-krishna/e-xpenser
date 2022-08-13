@@ -3,22 +3,23 @@ import { useEffect } from 'react'
 import InputForm from "../components/InputForm"
 import Stats from "../components/Stats"
 import Table from "../components/Table"
+import MainContainer from "../components/MainContainer"
 import { useUser } from '../lib/hooks'
 import { wrapper } from '../redux/store'
 import { readTxns } from '../redux/features/txnsSlice'
 
 export default function HomePage() {
-  const [user] = useUser()
+  // const [user] = useUser()
 
-  useEffect(() => {
-    if (!user) {
-      Router.push('/login')
-    }
-  }, [user])
+  // useEffect(() => {
+  //   if (!user) {
+  //     Router.push('/login')
+  //   }
+  // }, [user])
 
 
   return (
-    <div className="drawer-content flex flex-col items-center justify-center p-2 md:max-h-screen lg:max-h-screen">
+    <MainContainer>
       {/* top section */}
       <div className="container h-1/5 my-2 flex">
         <Stats />
@@ -37,7 +38,7 @@ export default function HomePage() {
         {/* input form */}
         <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
       </div>
-    </div>
+    </MainContainer>
 
   )
 }

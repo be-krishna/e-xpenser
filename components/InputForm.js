@@ -4,13 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createTxn } from '../redux/features/txnSlice';
 import { readTxns } from '../redux/features/txnsSlice';
 import moment from 'moment';
-
-const categories = [
-  { id: "fnd", value: "food_drink", name: "Food & Drinks" },
-  { id: "ent", value: "entertainment", name: "Entertainment" },
-  { id: "tran", value: "transport", name: "Transport" },
-  { id: "misc", value: "misc", name: "Miscellaneous" },
-]
+import { expenseCategory, revenueCategory } from "../lib/category"
 
 const max_date = moment().format('YYYY-MM-DD');
 
@@ -19,7 +13,6 @@ const InputForm = () => {
   const { loading, success } = useSelector((state) => state.txn);
 
   const [added, setAdded] = useState(false)
-
   const [selectedOption, setSelectedOption] = useState("");
   const [expense, setExpense] = useState(true)
 
@@ -33,7 +26,7 @@ const InputForm = () => {
     const body = {
       title: e.currentTarget.title.value,
       amount: e.currentTarget.amount.value,
-      category: expense ? e.currentTarget.category.value : "income",
+      category: e.currentTarget.category.value,
       date: e.currentTarget.date.value,
       description: e.currentTarget.description.value,
       type: expense ? "expense" : "income"
@@ -66,9 +59,13 @@ const InputForm = () => {
             <input type="text" name="title" placeholder="Title" className="my-2 input input-bordered w-full" />
             <input type="text" name="amount" placeholder="Amount" className="my-2 input input-bordered w-full" />
 
-            <select name="category" onChange={handleOptions} value={selectedOption} className='select select-bordered my-2 w-full' disabled={!expense}>
+            <select name="category" onChange={handleOptions} value={selectedOption} className='select select-bordered my-2 w-full'>
               <option value="" disabled>Select Category</option>
-              {categories.map((cat) => (<option key={cat.id} value={cat.value}>{cat.name}</option>))}
+              {expense
+                ? expenseCategory.map((cat) => (<option key={cat.id} value={cat.value}>{cat.name}</option>))
+                : revenueCategory.map((cat) => (<option key={cat.id} value={cat.value}>{cat.name}</option>))
+
+              }
             </select>
 
             <input type="date" max={max_date} name="date" placeholder="Date" className="my-2 input input-bordered w-full" />

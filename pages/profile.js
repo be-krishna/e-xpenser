@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import Router from 'next/router'
 import { useUser } from '../lib/hooks'
+import MainContainer from '../components/MainContainer'
 
 function ProfileEdit() {
   const [user, { mutate }] = useUser()
@@ -39,7 +40,7 @@ function ProfileEdit() {
   }
 
   return (
-    <>
+    <MainContainer>
       <div className="form-container">
         <form onSubmit={handleEditProfile}>
           <label>
@@ -63,7 +64,7 @@ function ProfileEdit() {
           color: #b71c1c;
         }
       `}</style>
-    </>
+    </MainContainer>
   )
 }
 

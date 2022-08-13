@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { CakeIcon, MusicNoteIcon, PencilIcon, QuestionMarkCircleIcon, TagIcon, TrashIcon, TruckIcon } from "@heroicons/react/outline"
+import { BookOpenIcon, CakeIcon, MusicNoteIcon, PencilIcon, QuestionMarkCircleIcon, TagIcon, TrashIcon, TruckIcon } from "@heroicons/react/outline"
+import { CashIcon, HomeIcon, CurrencyRupeeIcon, TrendingUpIcon } from "@heroicons/react/solid"
 import TransactionDetail from './TransactionDetail'
 import moment from 'moment'
 import Link from 'next/link'
@@ -24,17 +25,35 @@ const TableRow = ({ txn }) => {
   }
 
 
-  const categoryIcon = (cat) => {
-
+  const expCatIcon = (cat) => {
     switch (cat) {
     case "food_drink":
-      return <CakeIcon />
+      return <CakeIcon className='text-food' />
     case "entertainment":
-      return <MusicNoteIcon />
+      return <MusicNoteIcon className='text-ent' />
     case "transport":
-      return <TruckIcon />
+      return <TruckIcon className='text-trans' />
+    case "education":
+      return <BookOpenIcon className='text-edu' />
     case "misc":
-      return <TagIcon />
+      return <TagIcon className='text-misc' />
+    default:
+      return <QuestionMarkCircleIcon />
+    }
+  }
+
+  const revCatIcon = (cat) => {
+    switch (cat) {
+    case "salary":
+      return <CashIcon className='text-sal' />
+    case "rent":
+      return <HomeIcon className='text-rent' />
+    case "interest":
+      return <CurrencyRupeeIcon className='text-int' />
+    case "funds":
+      return <TrendingUpIcon className='text-funds' />
+    case "misc":
+      return <TagIcon className='text-misc' />
     default:
       return <QuestionMarkCircleIcon />
     }
@@ -46,7 +65,7 @@ const TableRow = ({ txn }) => {
         <td>
           <div className="flex items-center space-x-6">
             <div className='w-8 text-success'>
-              {categoryIcon(txn.category)}
+              {txn.type === "expense" ? expCatIcon(txn.category) : revCatIcon(txn.category)}
             </div>
             <div>
               <div className="font-bold">{txn.title}</div>
@@ -68,7 +87,7 @@ const TableRow = ({ txn }) => {
               </a>
             </Link>
             <label htmlFor="my-modal-4" className="modal-button">
-              <TrashIcon className='w-6 text-error cursor-pointer' onClick={()=> handleDelete(txn._id)} />
+              <TrashIcon className='w-6 text-error cursor-pointer' onClick={() => handleDelete(txn._id)} />
             </label>
           </div>
         </td>

@@ -21,7 +21,7 @@ export const createTxn = async (req, res) => {
 // Read txns (all)
 export const readTxns = async (req, res) => {
   try {
-    const txns = await Transaction.find().sort({ createdAt: -1 });
+    const txns = await Transaction.find().sort({ date: -1 });
 
     res.status(200).json({
       success: true,
