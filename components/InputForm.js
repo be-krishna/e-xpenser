@@ -6,9 +6,12 @@ import { readTxns } from '../redux/features/txnsSlice';
 import moment from 'moment';
 import { expenseCategory, revenueCategory } from "../lib/category"
 
+import { useUser } from "../lib/hooks"
+
 const max_date = moment().format('YYYY-MM-DD');
 
 const InputForm = () => {
+  const [user] = useUser()
   const dispatch = useDispatch();
   const { loading, success } = useSelector((state) => state.txn);
 
@@ -29,7 +32,8 @@ const InputForm = () => {
       category: e.currentTarget.category.value,
       date: e.currentTarget.date.value,
       description: e.currentTarget.description.value,
-      type: expense ? "expense" : "income"
+      type: expense ? "expense" : "income",
+      user: user.username
     }
 
     console.log(body);

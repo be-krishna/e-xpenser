@@ -7,7 +7,7 @@ const Table = () => {
   const { txns } = useSelector((state) => state.txns);
 
   return (
-    <div>
+    <div className="container">
       <table className="table w-full">
         <tbody>
           {
@@ -19,7 +19,7 @@ const Table = () => {
                 />
               ))
             ) : (
-              <tr><td>No task!</td></tr>
+              <tr><td>No transactions!</td></tr>
             )
           }
         </tbody>
