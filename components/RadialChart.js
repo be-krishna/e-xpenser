@@ -10,7 +10,7 @@ import { ResponsiveRadialBar } from '@nivo/radial-bar'
 export const MyResponsiveRadialBar = () => {
   const data = [
     {
-      "id": "Supermarket",
+      "id": "Week",
       "data": [
         {
           "x": "Vegetables",
@@ -31,7 +31,7 @@ export const MyResponsiveRadialBar = () => {
       ]
     },
     {
-      "id": "Combini",
+      "id": "Month",
       "data": [
         {
           "x": "Vegetables",
@@ -52,7 +52,7 @@ export const MyResponsiveRadialBar = () => {
       ]
     },
     {
-      "id": "Online",
+      "id": "Year",
       "data": [
         {
           "x": "Vegetables",
@@ -73,21 +73,21 @@ export const MyResponsiveRadialBar = () => {
       ]
     }
   ]
-  return(
+  return (
     <ResponsiveRadialBar
       data={data}
       valueFormat=">-.2f"
       padding={0.4}
       cornerRadius={2}
-      margin={{ top: 40, right: 120, bottom: 40, left: 40 }}
+      margin={{ top: 40, bottom: 40, }}
       radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
       circularAxisOuter={{ tickSize: 5, tickPadding: 12, tickRotation: 0 }}
       legends={[
         {
-          anchor: 'right',
+          anchor: 'top-left',
           direction: 'column',
           justify: false,
-          translateX: 80,
+          translateX: 60,
           translateY: 0,
           itemsSpacing: 6,
           itemDirection: 'left-to-right',
