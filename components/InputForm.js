@@ -36,8 +36,6 @@ const InputForm = () => {
       user: user.username
     }
 
-    console.log(body);
-
     await dispatch(createTxn(body)).then(() => {
       dispatch(readTxns());
       setAdded(true)
