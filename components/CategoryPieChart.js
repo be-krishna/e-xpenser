@@ -104,39 +104,6 @@ export const MyResponsivePie = () => {
           id: fills[getRandom(0, fills.length)]
         }
       })}
-      // fill={[
-      //   {
-      //     match: {
-      //       id: 'ent'
-      //     },
-      //     id: 'dots'
-      //   },
-      //   {
-      //     match: {
-      //       id: 'tran'
-      //     },
-      //     id: 'lines'
-      //   },
-      //   {
-      //     match: {
-      //       id: 'fnd'
-      //     },
-      //     id: 'dots'
-      //   },
-      //   {
-      //     match: {
-      //       id: 'edu'
-      //     },
-      //     id: 'lines'
-      //   },
-      //   {
-      //     match: {
-      //       id: 'misc'
-      //     },
-      //     id: 'squares'
-      //   },
-
-      // ]}
       legends={[
         {
           anchor: 'bottom',
@@ -161,6 +128,7 @@ export const MyResponsivePie = () => {
           ]
         }
       ]}
+
     />
   )
 }

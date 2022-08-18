@@ -5,25 +5,19 @@ import { MyResponsivePie } from '../components/CategoryPieChart'
 import Stats from "../components/Stats"
 import Table from '../components/Table'
 import { useUser } from '../lib/hooks'
+import { useSelector } from 'react-redux';
 
-// import { data } from "../components/PieChart"
 import { wrapper } from '../redux/store'
 import { readRevs } from '../redux/features/txnsSlice'
 
 const Revenue = () => {
-  const [user] = useUser()
+  const { txns } = useSelector((state) => state.txns);
 
 
-  useEffect(() => {
-    if (!user) {
-      Router.push('/login')
-    }
-
-  }, [user])
   return (
     <MainContainer>
       <div className="container h-1/5 my-2 flex">
-        <Stats />
+        <Stats txns={txns} />
       </div>
       {/* bottom section */}
       <div className="h-4/5 container flex flex-col lg:flex-row xl:flex-row 2xl:flex-row gap-2">

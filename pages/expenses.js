@@ -7,23 +7,18 @@ import Table from '../components/Table'
 import { useUser } from '../lib/hooks'
 import { wrapper } from '../redux/store'
 import { readExpns } from '../redux/features/txnsSlice'
+import { useSelector } from 'react-redux';
+
 
 
 import { data } from "../components/PieChart"
 const Expenses = () => {
-  const [user] = useUser()
+  const { txns } = useSelector((state) => state.txns);
 
-
-  useEffect(() => {
-    if (!user) {
-      Router.push('/login')
-    }
-
-  }, [user])
   return (
     <MainContainer>
       <div className="container h-1/5 my-2 flex">
-        <Stats />
+        <Stats txns={txns} />
       </div>
       {/* bottom section */}
       <div className="container h-4/5 flex flex-col lg:flex-row xl:flex-row 2xl:flex-row gap-2">
