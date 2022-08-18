@@ -6,16 +6,19 @@ import moment from 'moment'
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
 import { deleteTxn } from "../redux/features/txnSlice"
-import { readTxns } from "../redux/features/txnsSlice"
+import { readTxns, readExpns, readRevs } from "../redux/features/txnsSlice"
+import { useRouter } from 'next/router'
 
 const TableRow = ({ txn }) => {
   const [deleted, setDeleted] = useState(false)
 
   const dispatch = useDispatch()
-
+  const router = useRouter()
   const handleDelete = (id) => {
     dispatch(deleteTxn(id)).then(() => {
-      dispatch(readTxns())
+      if (router.pathname === "/") dispatch(readTxns())
+      if (router.pathname === "/expenses") dispatch(readExpns())
+      if (router.pathname === "/revenues") dispatch(readRevs())
       setDeleted(true)
     })
 

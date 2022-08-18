@@ -45,8 +45,8 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className='hover-bordered'>
-            <Link href="/revenue">
-              <a className={router.pathname == "/revenue" ? "active" : ""}>
+            <Link href="/revenues">
+              <a className={router.pathname == "/revenues" ? "active" : ""}>
                 <ArrowRightIcon className='w-6' />
                 Revenue
               </a>

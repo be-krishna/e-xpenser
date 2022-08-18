@@ -1,12 +1,12 @@
 import Router from 'next/router'
 import React, { useEffect } from 'react'
 import MainContainer from "../components/MainContainer"
-import { MyResponsivePie } from '../components/PieChart'
+import { MyResponsivePie } from '../components/CategoryPieChart'
 import Stats from "../components/Stats"
 import Table from '../components/Table'
 import { useUser } from '../lib/hooks'
 
-import { data } from "../components/PieChart"
+// import { data } from "../components/PieChart"
 import { wrapper } from '../redux/store'
 import { readRevs } from '../redux/features/txnsSlice'
 
@@ -38,7 +38,7 @@ const Revenue = () => {
         <div className="card w-2/5 max-h-full bg-base-100 shadow-lg">
           <div className="card-body items-center">
             <h2 className="card-title">Categories</h2>
-            <MyResponsivePie data={data} />
+            <MyResponsivePie />
           </div>
         </div>
         {/* input form */}
