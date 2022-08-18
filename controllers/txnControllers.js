@@ -1,6 +1,4 @@
 import Transaction from '../models/txn';
-import { useUser } from '../lib/hooks';
-
 
 // Create txn
 export const createTxn = async (req, res) => {
@@ -95,6 +93,40 @@ export const deleteTxn = async (req, res) => {
 
     res.status(200).json({
       success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error,
+    });
+  }
+};
+
+// Read expenses (all)
+export const readExpns = async (req, res) => {
+  try {
+    const txns = await Transaction.find({ type: "expense" }).sort({ date: -1 });
+
+    res.status(200).json({
+      success: true,
+      txns,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error,
+    });
+  }
+};
+
+// Read expenses (all)
+export const readRevs = async (req, res) => {
+  try {
+    const txns = await Transaction.find({ type: "revenue" }).sort({ date: -1 });
+
+    res.status(200).json({
+      success: true,
+      txns,
     });
   } catch (error) {
     res.status(500).json({

@@ -15,6 +15,24 @@ export const readTxns = createAsyncThunk("txns/readTxns", async () => {
     console.log(error.response.data);
   }
 });
+// Read Transactions
+export const readExpns = createAsyncThunk("txns/readExpns", async () => {
+  try {
+    const response = await axios.get(`${baseUri}/api/transactions/expenses`);
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+});
+// Read Transactions
+export const readRevs = createAsyncThunk("txns/readRevs", async () => {
+  try {
+    const response = await axios.get(`${baseUri}/api/transactions/revenues`);
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+});
 
 
 const txnsSlice = createSlice({
@@ -42,6 +60,30 @@ const txnsSlice = createSlice({
       state.success = true;
     },
     [readTxns.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.message = payload;
+    },
+    [readExpns.pending]: (state) => {
+      state.loading = true;
+    },
+    [readExpns.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.txns = payload.txns;
+      state.success = true;
+    },
+    [readExpns.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.message = payload;
+    },
+    [readRevs.pending]: (state) => {
+      state.loading = true;
+    },
+    [readRevs.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.txns = payload.txns;
+      state.success = true;
+    },
+    [readRevs.rejected]: (state, { payload }) => {
       state.loading = false;
       state.message = payload;
     },

@@ -5,6 +5,9 @@ import { MyResponsivePie } from '../components/PieChart'
 import Stats from "../components/Stats"
 import Table from '../components/Table'
 import { useUser } from '../lib/hooks'
+import { wrapper } from '../redux/store'
+import { readExpns } from '../redux/features/txnsSlice'
+
 
 import { data } from "../components/PieChart"
 const Expenses = () => {
@@ -44,5 +47,12 @@ const Expenses = () => {
     </MainContainer>
   )
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async ({ req, res }) => {
+    await store.dispatch(readExpns({ req, res }))
+  }
+);
+
 
 export default Expenses

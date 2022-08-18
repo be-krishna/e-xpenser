@@ -32,7 +32,7 @@ const InputForm = () => {
       category: e.currentTarget.category.value,
       date: e.currentTarget.date.value,
       description: e.currentTarget.description.value,
-      type: expense ? "expense" : "income",
+      type: expense ? "expense" : "revenue",
       user: user.username
     }
 
@@ -79,7 +79,7 @@ const InputForm = () => {
           {added && <div className="toast toast-top toast-end">
             <div className="alert alert-success">
               <div>
-                <span>Added Successfully!</span>
+                <span className='text-primary-content'>Added Successfully!</span>
               </div>
             </div>
           </div>}

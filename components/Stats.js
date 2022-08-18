@@ -10,7 +10,7 @@ const totalExp = (txns) => {
 }
 
 const totalRev = (txns) => {
-  txns = txns.filter(i => i.type === "income")
+  txns = txns.filter(i => i.type === "revenue")
   let total = 0
   txns.forEach(i => total += i.amount)
   return total

@@ -7,6 +7,8 @@ import Table from '../components/Table'
 import { useUser } from '../lib/hooks'
 
 import { data } from "../components/PieChart"
+import { wrapper } from '../redux/store'
+import { readRevs } from '../redux/features/txnsSlice'
 
 const Revenue = () => {
   const [user] = useUser()
@@ -45,5 +47,11 @@ const Revenue = () => {
     </MainContainer>
   )
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async ({ req, res }) => {
+    await store.dispatch(readRevs({ req, res }))
+  }
+);
 
 export default Revenue
