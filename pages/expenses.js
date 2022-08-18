@@ -1,17 +1,14 @@
-import Router from 'next/router'
-import React, { useEffect } from 'react'
-import MainContainer from "../components/MainContainer"
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { MyResponsivePie } from '../components/CategoryPieChart'
+import MainContainer from "../components/MainContainer"
 import Stats from "../components/Stats"
 import Table from '../components/Table'
-import { useUser } from '../lib/hooks'
-import { wrapper } from '../redux/store'
 import { readExpns } from '../redux/features/txnsSlice'
-import { useSelector } from 'react-redux';
+import { wrapper } from '../redux/store'
 
 
 
-import { data } from "../components/PieChart"
 const Expenses = () => {
   const { txns } = useSelector((state) => state.txns);
 
@@ -33,7 +30,7 @@ const Expenses = () => {
         <div className="card w-2/5 max-h-full bg-base-100 shadow-lg">
           <div className="card-body items-center">
             <h2 className="card-title">Categories</h2>
-            <MyResponsivePie data={data} />
+            <MyResponsivePie />
           </div>
         </div>
         {/* input form */}

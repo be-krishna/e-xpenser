@@ -13,8 +13,10 @@
   "dependencies": {
     "@hapi/iron": "6.0.0",
     "@heroicons/react": "^1.0.6",
-    "@nivo/core": "^0.78.0",
+    "@nivo/bar": "^0.79.1",
+    "@nivo/core": "^0.79.0",
     "@nivo/pie": "^0.78.0",
+    "@nivo/radial-bar": "^0.79.1",
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "cookie": "0.4.0",

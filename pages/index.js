@@ -1,12 +1,10 @@
-import Router from 'next/router'
-import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import InputForm from "../components/InputForm"
+import MainContainer from "../components/MainContainer"
 import Stats from "../components/Stats"
 import Table from "../components/Table"
-import MainContainer from "../components/MainContainer"
-import { wrapper } from '../redux/store'
 import { readTxns } from '../redux/features/txnsSlice'
-import { useSelector } from 'react-redux';
+import { wrapper } from '../redux/store'
 
 
 export default function HomePage() {
